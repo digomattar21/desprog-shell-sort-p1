@@ -55,38 +55,53 @@ void insertion_sort(int v[], int n) {
 
 ??? Checkpoint
 
-Tendo revisado o funcionamento do *Insertion Sort*, considere as listas abaixo:
+Agora vamos praticar um pouco. Tendo revisado o funcionamento do *Insertion Sort*, veja as listas abaixo:
 
 ``` c
-int v1[] = {4, 8, 6, 7, 5}
-int v2[] = {5, 3, 4, 2, 1}
+int v1[] = {4, 8, 5, 6, 7}
+int v2[] = {5, 3, 2, 4, 1}
 ```
 
-Simule o algoritmo de ordenação *Insertion Sort* para cada uma das listas, escrevendo o estado da lista no **FINAL** de cada iteração do loop **EXTERNO**.
+Considere essas mesmas listas logo antes do **último** loop **EXTERNO** do *Insertion Sort*:
+
+``` c
+int v1[] = {4, 5, 6, 8, 7}
+int v2[] = {2, 3, 4, 5, 1}
+```
+
+Simule o algoritmo de ordenação *Insertion Sort* para cada uma das listas, escrevendo o estado da lista no **FINAL** de cada iteração do loop **INTERNO**, simulando apenas o **último** loop **EXTERNO** de modo completo.
 
 ::: Gabarito
 ```
 Lista v1:
 
-4 8 6 7 5
-4 6 8 7 5
-4 6 7 8 5
+temp = [7]
+
+4 5 6 8 8
 4 5 6 7 8
 
 Lista v2:
 
-3 5 4 2 1
-3 4 5 2 1
-2 3 4 5 1
+temp = [1]
+
+2 3 4 5 5
+2 3 4 4 5
+2 3 3 4 5
+2 2 3 4 5
 1 2 3 4 5
+
 ```
 :::
 
-Observem as ordenações realizadas por *Insertion Sort* acima. Pensem com calma, considerando tantos os loops externos quanto internos e respondam em qual delas que o algoritmo **performou bem** e em qual delas que o algoritmo teve que **realizar bem mais deslocamentos** para conseguir que o vetor esteja **finalmente ordenado**? Você é capaz de definir a **situação** na qual o *Insertion Sort* é um algoritmo que **não performa tão bem?** 
+???
+
+??? Checkpoint
+
+Observem as ordenações realizadas por *Insertion Sort* acima. Pensem com calma considerando os dois casos e respondam em qual deles que o algoritmo **performou bem** e em qual delas que o algoritmo teve que **realizar bem mais deslocamentos** para conseguir que o vetor esteja **finalmente ordenado**. Você é capaz de definir a **situação** na qual o *Insertion Sort* é um algoritmo que **não performa tão bem?** 
 
 ::: Gabarito
 
-A lista v2 precisou de muito mais deslocamentos para que ficasse ordenada, diferentemente da lista v1. O que podemos observar é que no caso da lista v2, temos **elementos pequenos posicionados à direita do vetor**, o que força o algoritmo *Insertion Sort* a realizar muito mais iterações, consumindo mais tempo, do que no caso desses elementos já estarem mais ordenados, próximos do começo. 
+A lista v2 precisou de muito mais deslocamentos para que ficasse ordenada, diferentemente da lista v1. O que podemos observar é que no caso da lista v2, temos a presença de **elementos pequenos posicionados à direita do vetor**, o que força o algoritmo *Insertion Sort* a realizar muito mais iterações, consumindo mais tempo do que no caso desses elementos já estarem mais ordenados, próximos do começo. 
 
 :::
 
