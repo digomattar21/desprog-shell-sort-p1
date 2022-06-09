@@ -1,8 +1,6 @@
 Parte do Paulo
 ======
 
-Usando a mesma lógica do *insertion sort*, vamos descartar a ideia de usar os elementos adjacentes do vetor. Ao invés disso, vamos colocar um intervalo entre os elementos a serem comparados.
-
 A comparação e o deslocamento dos menores elementos para esquerda era da seguinte maneira:
 
 ![](insertion_sort.png)
@@ -11,13 +9,11 @@ Ao invés de compararmos o 1 com 7, vamos pular uns indíces e compará-lo com o
 
 ![](shellsort_1_gap.png)
 
-Ou seja, a idéia aqui é você comparar o elemento atual com um outro "mais longe", a um gap de distância, em seguida, realizamos a lógica do insertion.
+Ou seja, a idéia aqui é você comparar o elemento atual com um outro "mais longe" a um gap de distância, e em seguida, realizar a troca.
 
+Conseguem exergar a vantagem aqui? Preste atenção no número 1. No *insetion*, ele vai da **sétima** posição para a **sexta** em 1 iteração. Mas na segunda lógica, ele foi da **sétima** posição para a **quarta** posição, em 1 iteração também! Se o nosso objetivo é ordenar, a segunda opção parece ser menos custosa em operação...bom, senhoras e senhores, eis o *shell sort*. Mas isso só é a ponta do iceberg, vamos nos aprofundar.
 
-Okay, mas no que isso vai ajudar? Inicialmente, parece até um pouco estranho fazer isso, mas essa lógica é a chave para combater uma das fraquezas do *insertion sort*: quanto mais pra direita estiver um número pequeno, mais deslocamentos ele precisa fazer para a esquerda. Ou seja, o *insertion* trabalha **bem** com vetores que possuem um certo nível de ordenância, caso o contrário, ele se dá mal.Um pouco confuso? Tudo bem, vamos explorar essa idéia um pouco mais pra frente, por isso, vamos focar primeiro no funcionamento do algoritimo. 
-
-Vamos facilitar nossa vizualização. Dado o vetor abaixo, vamos imaginar um par de subvetor para cada comparação feita com um gap igual a 2. 
-
+Para facilitar a nossa vizualização, utilizaremos o vetor abaixo. Vamos imaginar um par de subvetor para cada comparação feita com um gap igual a 2. 
 
 ![](vetor_1.png)
 
@@ -28,13 +24,19 @@ Ficaria algo parecido como abaixo.
 Note que {red}(não) foi realizado as trocas dos elementos, só fizemos a separação dos conjuntos, que ficaram da seguinte maneira:
 
 ```
-{33, 40}
-{31,  8}
-{40, 12}
-{8,  17}
-{12, 25}
-{17, 42}
+{33, 40, 12, 25}
+{31, 8, 17, 42}
 ```
+
+**OBS**: Não são apenas esses dois subvetores presentes no gap = 2, se continuássemos, haveria mais pares como:
+
+```
+{40, 12, 25}
+{8, 17, 42}
+{12, 25}
+{17,42}
+```
+já que o algoritmo do *shell sort* "anda" ao longo do vetor até o limite do gap chegar no último índice. Mas para não deixar o desenho poluído, pegamos apenas os dois primeiros. 
 
 Vamos ver se você entendeu a lógica. 
 
@@ -44,12 +46,8 @@ Dado o vetor abaixo, separe-o em subconjuntos, considerando um gap igual a 2.
 ![](vetor_check_1.png)
 ::: Gabarito
 ```
-{44, 20}
-{2,  15}
-{20, 45}
-{15, 14}
-{45, 25}
-{14, 42}
+{44, 20, 45, 25}
+{2, 15, 14, 42}
 ```
 :::
 ???
@@ -61,11 +59,8 @@ Dado o vetor abaixo, separe-o em subconjuntos, considerando um gap igual a 3.
 
 ::: Gabarito
 ```
-{22, 62}
-{16, 15}
-{60, 20}
-{62,  7}
-{15,  4}
+{22, 62, 7}
+{16, 15, 4}
 ```
 :::
 ???
@@ -79,13 +74,11 @@ Dado o vetor abaixo, separe-o em subconjuntos, considerando um gap igual a 4.
 ```
 {32, 39}
 {27, 49}
-{46, 93}
-{38, 82}
 ```
 :::
 ???
 
-Até aqui, o conceito de subvetor deve ter fica mais claro. Vamos voltar com o vetor do ``Checkpoint_1``, que está logo abaixo. Realizaremos a lógica do *insertion sort* para cada um dos cojuntos de subvetores.
+Até aqui, o conceito de subvetor deve ter fica mais claro. Vamos voltar com o vetor inicial, que está logo abaixo. Realizaremos a troca para cada um dos cojuntos de subvetores.
 
 ![](gabarito_check_1.png)
 
@@ -93,18 +86,44 @@ Até aqui, o conceito de subvetor deve ter fica mais claro. Vamos voltar com o v
 
 
 ```
-{33, 40}
-{8,  31}
-{12, 40}
-{17, 31}
-{25, 40}
-{31, 42}
+{33, 12, 25, 40}
+{8, 17, 31, 42}
 ```
-
-
-Assim, ficamos com o vetor ordenado da maneira abaixo. Simples, certo? E é assim que o *shell sort* funciona.
+Agora junte os dois subvetores para formarmos o vetor completo. Assim, ficaremos com o vetor ordenado da maneira abaixo. Simples, certo? E é assim que o *shell sort* funciona.
 
 ![](vetor_2.png)
+
+Vamos ver se você entendeu até aqui.
+
+??? Checkpoint 3
+Realize a ordenação do vetor abaixo, só que agora, com o gap = 4. 
+
+![](vetor_1.png)
+
+::: Gabarito
+![](gabarito_check_3.png)
+
+Dessa maneira, o vetor ficará ordenado da seguinte maneira:
+
+![](gabarito_check_3_2.png)
+
+:::
+
+???
+
+??? Checkpoint 4
+Utilizando o vetor adquirido no *Checkpoint 3*, realize a ordenação, só que agora, com o gap = 2. 
+
+::: Gabarito
+![](gabarito_check_4.png)
+
+Dessa maneira, o vetor ficará ordenado da seguinte maneira:
+
+![](gabarito_check_4_2.png)
+
+:::
+
+???
 
 Vamos dar uma pausa nos exercícios e discutir. A essa altura do campeonato, pode ser que você teve alguns desses questionamento ao longo do handout:
 
@@ -127,44 +146,12 @@ e isso continua até o *gap ser igual a 1*.
 
 Ué, mas a gente não adotou o gap incialmente a 2? E o tamanho do vetor é 8...algo de errado não está certo!
 
-Pera lá, a verdade é que fizemos isso pra facilitar o entendimento do algoritimo. Então vamos fazer o *shell sort* de verdade, agora seguindo as regras descritas acima.
+Pera lá, a verdade é que fizemos isso pra facilitar o entendimento do algoritimo. Mas de agora em diante, você deve realizar o *shell sort* seguindo as regras descritas acima.
 
-??? Checkpoint 3
-Realize a ordenação do vetor abaixo, só que agora, com o gap = 4. 
-
-![](vetor_1.png)
-
-::: Gabarito
-![](gabarito_check_3.png)
-
-Dessa maneira, o vetor ficará ordenado da seguinte maneira:
-
-![](gabarito_check_3_2.png)
-
-:::
-
-???
-
-??? Checkpoint 4
-Seguindo a sequência adotada do gap, vamos dividí-lo por 2. Realize a ordenação do vetor adquirido no exercício anterior, só que agora, com o gap = 2. 
-
-::: Gabarito
-![](gabarito_check_4.png)
-
-Dessa maneira, o vetor ficará ordenado da seguinte maneira:
-
-![](gabarito_check_4_2.png)
-
-:::
-
-???
-
-Antes de partir para a última etapa quando gap é igual a 1, por acaso não ficou uma pulga atrás da orelha quando a gente faz um *shell sort* de gap igual a 1? Pense bem, se estamos comparando o elemento atual com o próximo a uma distância igual a 1, basicamente estamos comparando o elemento adjacente! Isso soa familiar? Sim, é a mesma coisa do que fazer um *insertion sort*! Nesse caso em particular, não só vamos usar a lógica do *insertion*, mas como também estaremos realizando um *insertion sort* na prática. 
-
-Com isso em mente, vamos realizar a última etapa da ordenação deste vetor!
+Seguindo a sequência do gap nos últimos 2 exercícios, vamos fazer com ele igual a 1.
 
 ??? Checkpoint 5
-Realize a última etapa de ordenação do vetor, com um gap = 1, ou seja, um *insertion sort*!
+Realize a ordenação do vetor com um gap = 1
 
 ::: Gabarito
 ![](gabarito_check_5.png)
@@ -172,5 +159,17 @@ Realize a última etapa de ordenação do vetor, com um gap = 1, ou seja, um *in
 :::
 
 ???
+
+Por acaso você não ficou uma pulga atrás da orelha quando a gente faz essa etapa com gap igual a 1? Pense bem, se estamos comparando o elemento atual com o próximo a uma distância igual a 1, basicamente estamos comparando o elemento adjacente! Isso é a mesma coisa do que fazer um *insertion sort*! 
+
+![](wtf.png)
+
+Não faça essa cara, querido leitor. Eu sei que soa estranho isso...queríamos resolver a fraqueza do *insertion sort* usando a lógica do *shell sort*, mas no final das contas a gente acabou usando o *insertion* de novo. Mas a verdade é que isso faz todo o sentido! 
+
+Se vocês lembrarem das aulas do *insertion sort*, vimos que ele tende a ter uma boa performance quando o vetor já possui um certo nível de ordenância, caso o contrário, a operação acaba ficando custosa. Isso significa que o *shell* na verdade combate esse problema, deixando o vetor parcialmente ordenado nas primeiras iterações para que no fim, o *insertion sort* finalize a ordenação total!
+
+![](i-got-you.jpg)
+
+
 
 
