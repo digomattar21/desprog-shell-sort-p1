@@ -143,7 +143,7 @@ Note que {red}(não) foi realizado as trocas dos elementos, só fizemos a separa
 {31, 8, 17, 42}
 ```
 
-**OBS**: Não são apenas esses dois subvetores presentes no gap = 2, se continuássemos, haveria mais pares como:
+**OBS**: Não são apenas esses dois subvetores presentes no gap = 2, se continuássemos, haveria mais conjuntos como:
 
 ```
 {40, 12, 25}
@@ -159,12 +159,20 @@ Vamos ver se você entendeu a lógica.
 Dado o vetor abaixo, separe-o em subconjuntos, considerando um gap igual a 2.
 
 ![](vetor_check_1.png)
+
 ::: Gabarito
+
 ```
 {44, 20, 45, 25}
 {2, 15, 14, 42}
+{20, 45, 25}
+{15, 14, 42}
+{15, 14, 42}
+{45, 25}
+{14, 42}
 ```
 :::
+
 ???
 
 ??? Checkpoint 1.1
@@ -198,15 +206,15 @@ Dado o vetor abaixo, separe-o em subconjuntos, considerando um gap igual a 4.
 :::
 ???
 
-Até aqui, o conceito de subvetor deve ter fica mais claro. Vamos voltar com o vetor inicial, que está logo abaixo. Realizaremos a troca para cada um dos cojuntos de subvetores.
+Até aqui, o conceito de subvetor deve ter ficado mais claro. Vamos voltar com o vetor inicial, que está logo abaixo. Realizaremos a troca para cada um dos cojuntos de subvetores.
 
 ![](gabarito_check_1.png)
 
-**obs:** Lembre que se o próximo elemento for menor que o primeiro, troca, senão, faz nada. Recomendo fazer no papel ou tablet.
+**obs:** Lembre que se o próximo elemento for menor que o anterior, troca, senão, faz nada. Recomendo fazer no papel ou tablet.
 
 
 ```
-{33, 12, 25, 40}
+{12, 25, 33, 40}
 {8, 17, 31, 42}
 ```
 Agora junte os dois subvetores para formarmos o vetor completo. Assim, ficaremos com o vetor ordenado da maneira abaixo. Simples, certo? E é assim que o *shell sort* funciona.
@@ -273,6 +281,8 @@ Seguindo a sequência do gap nos últimos 2 exercícios, vamos fazer com ele igu
 ??? Checkpoint 5
 Realize a ordenação do vetor com um gap = 1
 
+![](gabarito_check_insertion.png)
+
 ::: Gabarito
 ![](gabarito_check_5.png)
 
@@ -327,6 +337,7 @@ void shellSort (int v[], int n) {
 ```
 
 Tendo em vista o funcionamento do *Shell Sort*, obtenha a **complexidade aproximada** para cada **gap** do algoritmo.
+- **Dica**: pense na quantidade de iterações da cada loop e faça a multiplicação.
 
 ::: Gabarito
 
@@ -352,13 +363,13 @@ Qual seria a **complexidade do pior caso** do *Shell Sort*? Será que dependendo
 
 A **complexidade** do algoritmo *Shell Sort* continua sendo quadrática pois inclui o *Insertion Sort* no final, mas não fica pior do que isso, pois a somatória de tudo que vem antes do gap = 1 (*Insertion Sort*) não tem como ser pior do que quadrático. Na pratica, espera-se que o *Insertion Sort* final seja mais rápido pois o vetor ja esta mais ordenado que antes.
 
-:::
-
-???
-
 | Melhor      | Media        | Pior |         
 | :---        |    :----:    |---:  |
 |O(n* log n)  | O(n* log n)  |O(n^2)|
+
+:::
+
+???
 
 A **complexidade de tempo** do algoritimo varia de acordo com a **sequência de incremento escolhida** (gap), sendo a melhor sequência de incremento **desconhecida**.
 
